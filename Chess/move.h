@@ -9,22 +9,33 @@
 
 void move(int *licznik, char board[8][8], int hidden_board[8][8])
 {
-    int b,c, move_column_int, move_row;
+    int b,c, move_column_int, move_row, choice=0;
+    int *re_choice=&choice;
     char a, move_column;
     if(*licznik%2==1) //Sprawdzanie ktory gracz ma aktualnie ruch
     {
+        one_more_choice_white:
+
         printf("Ruch koloru bialego: \n");
         printf("Wybierz wspolrzedna figury ktora chcesz sie ruszyc np. A5: ");
         scanf(" %c %d", &a, &b);
         c=convert_letter_to_number(a);
 
         //Wyswietlanie mozliwosci ruchu
-        rook_possible_moves(hidden_board, board, b, c, 2, 1); //ukryta plansza cyfr, plansza widoczna, wiersz, kolumna, kolor(2 - white, 1- black), kolor przeciwnika(2 - white, 1 - black)
-        knight_possible_moves(hidden_board, board, b, c, 2, 1);
-        pawn_possible_moves(hidden_board, board, b, c, 2, 1);
-        king_possible_moves(hidden_board, board, b, c, 2, 1);
-        bishop_possible_moves(hidden_board, board, b, c, 2, 1);
-        queen_possible_moves(hidden_board, board, b, c, 2, 1);
+        rook_possible_moves(hidden_board, board, b, c, 2, 1, re_choice); //ukryta plansza cyfr, plansza widoczna, wiersz, kolumna, kolor(2 - white, 1- black), kolor przeciwnika(2 - white, 1 - black)
+        knight_possible_moves(hidden_board, board, b, c, 2, 1, re_choice);
+        pawn_possible_moves(hidden_board, board, b, c, 2, 1, re_choice);
+        king_possible_moves(hidden_board, board, b, c, 2, 1, re_choice);
+        bishop_possible_moves(hidden_board, board, b, c, 2, 1, re_choice);
+        queen_possible_moves(hidden_board, board, b, c, 2, 1, re_choice);
+
+        //Sprawdzanie czy dana figura ma mozliwosc ruchu, jezeli nie to program wraca do wyboru figury ktora chcemy sie poruszyc
+        if(*re_choice==0) //Jezeli wartosc re_choice jest rowna 0, to figura nie ma mozliwosci ruchu
+        {
+            printf("\nTa figura nie ma mozliwosci ruchu lub na danym polu nie ma figury.\nWybierz jeszcze raz:\n ");
+            goto one_more_choice_white;
+            *re_choice=0;
+        }
 
         //Ruch
         printf("Podaj wspolrzedna na ktora chcesz sie poruszyc np. A5: ");
@@ -38,18 +49,27 @@ void move(int *licznik, char board[8][8], int hidden_board[8][8])
     }
     else
     {
+        one_more_choice_black:
+
         printf("Ruch koloru czarnego: \n");
         printf("Wybierz wspolrzedna figury ktora chcesz sie ruszyc np. A5: ");
         scanf(" %c %d", &a, &b);
         c=convert_letter_to_number(a);
 
         //Wyswietlanie mozliwosci ruchu
-        rook_possible_moves(hidden_board, board, b, c, 1, 2); //ukryta plansza cyfr, plansza widoczna, wiersz, kolumna, kolor(2 - white, 1- black), kolor przeciwnika(2 - white, 1 - black)
-        knight_possible_moves(hidden_board, board, b, c, 1, 2);
-        pawn_possible_moves(hidden_board, board, b, c, 1, 2);
-        king_possible_moves(hidden_board, board, b, c, 1, 2);
-        bishop_possible_moves(hidden_board, board, b, c, 1, 2);
-        queen_possible_moves(hidden_board, board, b, c, 1, 2);
+        rook_possible_moves(hidden_board, board, b, c, 1, 2, re_choice); //ukryta plansza cyfr, plansza widoczna, wiersz, kolumna, kolor(2 - white, 1- black), kolor przeciwnika(2 - white, 1 - black), sprawdzenie czy ruch jest mozliwy
+        knight_possible_moves(hidden_board, board, b, c, 1, 2, re_choice);
+        pawn_possible_moves(hidden_board, board, b, c, 1, 2, re_choice);
+        king_possible_moves(hidden_board, board, b, c, 1, 2, re_choice);
+        bishop_possible_moves(hidden_board, board, b, c, 1, 2, re_choice);
+        queen_possible_moves(hidden_board, board, b, c, 1, 2, re_choice);
+
+        if(*re_choice==0) //Jezeli wartosc re_choice jest rowna 0, to figura nie ma mozliwosci ruchu
+        {
+            printf("\nTa figura nie ma mozliwosci ruchu lub na danym polu nie ma figury.\nWybierz jeszcze raz:\n ");
+            goto one_more_choice_black;
+            *re_choice=0;
+        }
 
         //Ruch
         printf("Podaj wspolrzedna na ktora chcesz sie poruszyc np. A5: ");
