@@ -1,7 +1,7 @@
 void knight_possible_moves(int hidden_board[8][8], char board[8][8], int b, int c, int color, int enemy_color, int *re_choice)
 {
 
-    if(board[b-1][c]=='S') //Ruchy skoczka (konia)
+    if(board[b-1][c]=='N'||board[b-1][c]=='n') //Ruchy skoczka (konia)
         {
             int undo=0;
             char kolumna; //c - kolumna, b - wiersz

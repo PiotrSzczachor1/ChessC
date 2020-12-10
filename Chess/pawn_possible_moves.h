@@ -1,7 +1,7 @@
-int pawn_possible_moves(int hidden_board[8][8], char board[8][8], int b, int c, int color, int enemy_color, int *re_choice)
+void pawn_possible_moves(int hidden_board[8][8], char board[8][8], int b, int c, int color, int enemy_color, int *re_choice)
 {
 
-        if(board[b-1][c]=='p') //Ruchy pionka
+        if(board[b-1][c]=='P'||board[b-1][c]=='p') //Ruchy pionka
         {
             int undo=0;
             char kolumna; //c - kolumna, b - wiersz
@@ -98,6 +98,7 @@ int pawn_possible_moves(int hidden_board[8][8], char board[8][8], int b, int c, 
             *re_choice=undo; //Jezeli istnieje jakakolwiek opcja ruchu to undo przyjmie wartosc 1
 
         }
+
 
 }
 

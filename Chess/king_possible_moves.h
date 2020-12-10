@@ -1,7 +1,7 @@
 void king_possible_moves(int hidden_board[8][8], char board[8][8], int b, int c, int color, int enemy_color, int *re_choice)
 {
 
-        if(board[b-1][c]=='K') //Ruchy krola
+        if(board[b-1][c]=='K'||board[b-1][c]=='k') //Ruchy krola
         {
                 int undo=0;
                 char kolumna; //c - kolumna, b - wiersz
@@ -121,7 +121,7 @@ void king_possible_moves(int hidden_board[8][8], char board[8][8], int b, int c,
                     }
                 }
 
-                //Ruch w lewo, g�ra
+                //Ruch w lewo, gora
                 if( ( (b-2)>=0 ) && (c-1)>=0 && ( hidden_board[b-2][c-1]!=color ) ) //1 w gore 1 w prawo
                 {
                     undo=1;

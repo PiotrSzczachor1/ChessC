@@ -1,6 +1,6 @@
 void queen_possible_moves(int hidden_board[8][8], char board[8][8], int b, int c, int color, int enemy_color, int *re_choice)
 {
-    if(board[b-1][c]=='Q')
+    if(board[b-1][c]=='Q'||board[b-1][c]=='q')
         {
             int undo=0;
             char kolumna;
